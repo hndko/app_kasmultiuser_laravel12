@@ -43,6 +43,7 @@ Request / HTTP Layer
 4. **Policy**: Pengecekan hak akses tidak boleh menggunakan pengecekan `if (auth()->user()->role === 'admin')` secara hard-code di banyak controller/view. Gunakan `$this->authorize()` atau `@can()`.
 5. **PHP Enums**: Nilai fixed wajib menggunakan PHP Enum (`UserRole`, `UserStatus`, `TransactionType`, `CategoryType`). Jangan gunakan *magic string*.
 6. **No Database Query in Blade**: Blade view hanya menampilkan data presentation. Dilarang memanggil `\App\Models\...` di dalam Blade.
+7. **Konsistensi Environment Variables**: Setiap ada penambahan, perubahan, atau penyesuaian variable pada `.env`, **WAJIB** secara otomatis memperbarui `.env.example` agar selalu sinkron dan konsisten 100%.
 
 ---
 
