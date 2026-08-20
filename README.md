@@ -1,439 +1,196 @@
-# TailAdmin Laravel - Tailwind CSS Free Laravel Dashboard
+# 💰 Sistem Kas Sederhana Multi-User (Laravel 12 & TailAdmin)
 
-**TailAdmin Laravel** is a modern, production-ready admin dashboard template powered by **Laravel 12**, **Tailwind CSS v4**, **Alpine.js**, and a clean, modular architecture. TailAdmin is one of the most popular Tailwind CSS dashboard now also available for Larvael. It’s designed for building fast, scalable admin panels, CRM dashboards, SaaS backends, and any data-driven application where clarity and performance matter.
-![TailAdmin - Next.js Dashboard Preview](./tailadmin-laravel.png)
+[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=for-the-badge&logo=alpinedotjs&logoColor=white)](https://alpinejs.dev)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![Pest Testing](https://img.shields.io/badge/Pest_PHP-100%25_Pass-845EEE?style=for-the-badge&logo=php&logoColor=white)](https://pestphp.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
+**Sistem Kas Sederhana Multi-User** adalah aplikasi pencatatan keuangan dan monitoring arus kas (*cash flow*) modern yang dirancang untuk skala bisnis UMKM, toko, organisasi, hingga perusahaan multi-cabang. Dibangun di atas **Laravel 12**, **Tailwind CSS**, **Alpine.js**, dan template dashboard **TailAdmin** dengan menerapkan kaidah **Clean Architecture** (*Separation of Concerns*).
 
-## Quick Links
+![Sistem Kas Multi-User Preview](./public/images/logo/logo-icon.svg)
 
-* [✨ Get TailAdmin Laravel](https://tailadmin.com/laravel)
-* [📄 Documentation](https://tailadmin.com/docs)
-* [⬇️ Download](https://tailadmin.com/download)
-* [🌐 Live Demo](https://laravel-demo.tailadmin.com)
+---
 
-Here’s a tighter, more search-friendly version that highlights value and avoids fluff while keeping your structure intact.
+## ✨ Fitur Utama (Key Features)
 
-## ✨ Key Features
+- 🔐 **Autentikasi & Multi-User Role**:
+  - Hak akses berbasis peran (**Administrator** dan **Staff Kasir**).
+  - Manajemen status akun pengguna (*Active / Inactive*) dengan middleware proteksi.
+  - Pengaturan profil pengguna dilengkapi upload foto dengan **Live Image Preview**.
+- 📥 **Pencatatan Mutasi Kas Masuk & Keluar**:
+  - Nomor transaksi otomatis berformat `TRX-YYYYMMDD-XXXX`.
+  - Dukungan nomor referensi, nota, atau invoice.
+  - Audit trail lengkap (mencatat siapa yang membuat dan mengedit transaksi).
+- 🏷️ **Manajemen Kategori Kas Fleksibel**:
+  - Kategori khusus Pemasukan (*Income*), Pengeluaran (*Expense*), maupun Keduanya (*Both*).
+  - Proteksi integritas data (*soft delete*) agar kategori yang memiliki riwayat transaksi tidak dapat terhapus secara tidak sengaja.
+- 📊 **Dashboard Finansial Real-Time**:
+  - Kartu statistik total saldo kas, pemasukan bulan ini, pengeluaran bulan ini, dan selisih bersih.
+  - Grafik visual tren arus kas (6 bulan terakhir) dan distribusi pengeluaran per kategori.
+  - Daftar transaksi kas terkini dengan navigasi cepat.
+- 📑 **Laporan Kas & Buku Besar Siap Cetak**:
+  - Filter rentang tanggal kustom dan preset cepat (*Hari Ini, Bulan Ini, Bulan Lalu, Tahun Ini*).
+  - Perhitungan otomatis **Saldo Awal**, mutasi periode, dan **Saldo Akhir**.
+  - Kolom **Saldo Berjalan** (*running balance*) per transaksi.
+  - Tampilan cetak / PDF (*Print-Ready View*) lengkap dengan format tanda tangan pengesahan.
+- 🎨 **Desain UI/UX Modern (TailAdmin)**:
+  - Dukungan penuh mode gelap/terang (**Dark & Light Mode**).
+  - Form input dengan *icon group* dan *placeholder* kontekstual.
+  - Penomoran otomatis baris tabel (`#`) yang sinkron dengan pagination.
+- 🧪 **Pengujian Otomatis (100% Test Coverage)**:
+  - Dilengkapi 42 Feature & Unit Test (Pest PHP) dengan 110 assertions tanpa galat.
 
-* 🚀 **Laravel 12 Core** - Built on the latest Laravel release with improved routing, security, and Blade templating
-* 🎨 **Tailwind CSS v4** - Utility-first styling for rapid, consistent UI development
-* ⚡ **Alpine.js Interactivity** - Lightweight reactivity without a heavy JavaScript framework
-* 📦 **Vite Build System** - Fast dev server, instant HMR, and optimized production builds
-* 📱 **Fully Responsive Layouts** - Smooth, mobile-first design that adapts across all screen sizes
-* 🌙 **Built-in Dark Mode** - Ready-to-use modern dark theme for better usability and aesthetics
-* 📊 **Advanced UI Components** - Charts, data tables, forms, calendars, modals, and reusable blocks for complex dashboards
-* 🎯 **Production-Ready Dashboard UI** - Clean, modern interface crafted for real apps, not placeholder demos
+---
 
-### Other Versions
+## 📋 Prasyarat Sistem (Requirements)
 
-- [Next.js Version](https://github.com/TailAdmin/free-nextjs-admin-dashboard)
-- [React.js Version](https://github.com/TailAdmin/free-react-tailwind-admin-dashboard)
-- [Vue.js Version](https://github.com/TailAdmin/vue-tailwind-admin-dashboard)
-- [Angular Version](https://github.com/TailAdmin/free-angular-tailwind-dashboard)
-- [Laravel Version](https://github.com/TailAdmin/tailadmin-laravel)
+Sebelum menjalankan aplikasi, pastikan komputer/server Anda memenuhi spesifikasi berikut:
 
-## 📋 Requirements
-To set up TailAdmin Laravel, make sure your environment includes:
+- 🐘 **PHP**: Versi **8.2** atau **8.3+**
+- 📦 **Composer**: Versi **2.7+**
+- 🗄️ **Database**: **MySQL 8.0+** atau **MariaDB 10.4+**
+- 🟢 **Node.js & NPM**: Node.js **v18+ / v20+ LTS** dan NPM **9+**
+- 🧩 **Ekstensi PHP Wajib**:
+  `pdo_mysql`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`, `gd`, `zip`, `curl`, `intl`.
 
-* **PHP 8.2+**
-* **Composer** (PHP dependency manager)
-* **Node.js 18+** and **npm** (for compiling frontend assets)
-* **Database** - Works with SQLite (default), MySQL, or PostgreSQL
+---
 
-### Tailwind CSS Laravel Dashboard
+## 🚀 Cara Instalasi (Installation Guide)
 
-TailAdmin delivers a refined Tailwind CSS Laravel Dashboard experience, combining Laravel’s robust backend with Tailwind’s flexible utility classes. The result is a clean, fast, and customizable dashboard that helps developers build modern admin interfaces without the usual front-end complexity. It’s ideal for teams looking for a Tailwind-powered Laravel starter that stays lightweight and easy to scale.
+Ikuti langkah-langkah berikut untuk menyiapkan aplikasi di lingkungan lokal:
 
-### Laravel Admin Dashboard
-
-If you’re searching for a dependable Laravel Admin Dashboard template that’s easy to set up and ready for production, TailAdmin fits the job. It offers a polished UI, reusable components, optimized performance, and all the essentials needed to launch dashboards, CRM systems, and internal tools quickly. It gives developers a solid foundation, so projects move faster with fewer decisions to worry about.
-
-### Check Your Environment
-
-Verify your installations:
-
+### 1. Clone Repository
 ```bash
-php -v
-composer -V
-node -v
-npm -v
+git clone https://github.com/hndko/app_kasmultiuser_laravel12.git
+cd app_kasmultiuser_laravel12
 ```
 
-## 🚀 Quick Start Installation
-
-### Step 1: Clone the Repository
-
+### 2. Install Dependensi PHP & Frontend
 ```bash
-git clone https://github.com/TailAdmin/tailadmin-laravel.git
-cd tailadmin-laravel
-```
-
-### Step 2: Install PHP Dependencies
-
-```bash
+# Install package PHP via Composer
 composer install
-```
 
-This command will install all Laravel dependencies defined in `composer.json`.
-
-### Step 3: Install Node.js Dependencies
-
-```bash
+# Install package Node.js via NPM
 npm install
 ```
 
-Or if you prefer yarn or pnpm:
-
+### 3. Konfigurasi Environment (`.env`)
+Salin file konfigurasi contoh:
 ```bash
-# Using yarn
-yarn install
+# Windows:
+copy .env.example .env
 
-# Using pnpm
-pnpm install
-```
-
-### Step 4: Environment Configuration
-
-Copy the example environment file:
-
-```bash
+# Linux / macOS:
 cp .env.example .env
 ```
 
-**For Windows users:**
-
-```bash
-copy .env.example .env
-```
-
-**Or create it programmatically:**
-
-```bash
-php -r "file_exists('.env') || copy('.env.example', '.env');"
-```
-
-### Step 5: Generate Application Key
-
+### 4. Generate Application Key
 ```bash
 php artisan key:generate
 ```
 
-This creates a unique encryption key for your application.
-
-### Step 6: Configure Database
-
-#### Option A: Using MySQL/PostgreSQL
-
-Update your `.env` file with your database credentials:
-
+### 5. Konfigurasi Koneksi Database
+Buka file `.env` dan sesuaikan kredensial database MySQL Anda:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=tailadmin_db
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+DB_DATABASE=app_kasmultiuser_laravel12
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
-Create the database:
-
+### 6. Jalankan Migrasi & Database Seeder
+Jalankan perintah berikut untuk membuat seluruh tabel dan mengisikan data bawaan (kategori & akun pengguna):
 ```bash
-# MySQL
-mysql -u root -p -e "CREATE DATABASE tailadmin_db;"
-
-# PostgreSQL
-createdb tailadmin_db
+php artisan migrate --seed
 ```
 
-Run migrations:
-
+### 7. Buat Symlink Storage & Kompilasi Aset
 ```bash
-php artisan migrate
-```
-
-### Step 7: (Optional) Seed the Database
-
-If you want sample data:
-
-```bash
-php artisan db:seed
-```
-
-### Step 8: Storage Link
-
-Create a symbolic link for file storage:
-
-```bash
+# Membuat symlink untuk file avatar dan upload
 php artisan storage:link
-```
 
-## 🏃 Running the Application
-
-### Development Mode (Recommended)
-
-The easiest way to start development is using the built-in script:
-
-```bash
-composer run dev
-```
-
-This single command starts:
-- ✅ Laravel development server (http://localhost:8000)
-- ✅ Vite dev server for hot module reloading
-- ✅ Queue worker for background jobs
-- ✅ Log monitoring
-
-**Access your application at:** [http://localhost:8000](http://localhost:8000)
-
-### Manual Development Setup
-
-If you prefer to run services individually in separate terminal windows:
-
-**Terminal 1 - Laravel Server:**
-```bash
-php artisan serve
-```
-
-**Terminal 2 - Frontend Assets:**
-```bash
-npm run dev
-```
-
-### Building for Production
-
-#### Build Frontend Assets
-
-```bash
+# Kompilasi aset CSS & JS untuk produksi
 npm run build
 ```
 
-#### Optimize Laravel
+---
 
+## 💻 Cara Penggunaan (Usage)
+
+### Menjalankan Server Pengembangan (Local Dev)
+Jalankan Laravel artisan server:
 ```bash
-# Clear and cache configuration
-php artisan config:cache
-
-# Cache routes
-php artisan route:cache
-
-# Cache views
-php artisan view:cache
-
-# Optimize autoloader
-composer install --optimize-autoloader --no-dev
+php artisan serve
 ```
+Buka browser Anda dan akses: **`http://127.0.0.1:8000`**
 
-#### Production Environment
+> **Tip:** Jika sedang memodifikasi tampilan Blade/Tailwind, jalankan `npm run dev` di tab terminal terpisah untuk mengaktifkan Vite Hot Module Replacement (HMR).
 
-Update your `.env` for production:
+---
 
-```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://yourdomain.com
-```
+### 🔑 Kredensial Akun Bawaan (Pengujian / Seeder)
 
+| Peran (Role) | Nama | Alamat Email | Kata Sandi | Status Akun |
+|---|---|---|---|---|
+| **Administrator** | Administrator | `admin@example.com` | `password` | **Aktif** |
+| **Staff Kasir** | Staff Kasir | `user@example.com` | `password` | **Aktif** |
+| **User Nonaktif** | Inactive User | `inactive@example.com` | `password` | **Nonaktif (Terkunci)** |
 
-## 🧪 Testing
+---
 
-Run the test suite using Pest:
-
-```bash
-composer run test
-```
-
-Or manually:
-
+### 🧪 Menjalankan Automated Tests
+Jalankan pengujian seluruh alur otorisasi, CRUD transaksi, laporan kas, dan profil pengguna dengan Pest:
 ```bash
 php artisan test
 ```
 
-Run with coverage:
+---
 
-```bash
-php artisan test --coverage
-```
+## 📚 Dokumentasi Lengkap (Documentation Links)
 
-Run specific tests:
+Seluruh panduan teknis dan deployment terpisah tersedia pada folder [`docs/`](./docs/):
 
-```bash
-php artisan test --filter=ExampleTest
-```
+- 📖 [**01. PRD — Sistem Kas Sederhana Multi-User**](./docs/01.%20PRD%20%E2%80%94%20Sistem%20Kas%20Sederhana%20Multi-User.md) — Dokumen spesifikasi kebutuhan produk.
+- 💻 [**02. Deployment Guide — Local Development**](./docs/02.%20Deployment%20Guide%20%E2%80%94%20Local%20Development.md) — Panduan instalasi di komputer lokal (Windows/macOS/Linux).
+- 🌐 [**03. Deployment Guide — Shared Hosting (cPanel)**](./docs/03.%20Deployment%20Guide%20%E2%80%94%20Shared%20Hosting%20%28cPanel%29.md) — Panduan aman pemisahan folder di cPanel hosting.
+- 🐧 [**04. Deployment Guide — VPS (Ubuntu, Nginx, PHP-FPM, SSL)**](./docs/04.%20Deployment%20Guide%20%E2%80%94%20VPS%20%28Ubuntu,%20Nginx,%20PHP-FPM,%20SSL%29.md) — Provisioning server VPS produksi dari nol.
+- 🎛️ [**05. Deployment Guide — VPS with aaPanel**](./docs/05.%20Deployment%20Guide%20%E2%80%94%20VPS%20with%20aaPanel.md) — Panduan deployment praktis via kontrol panel aaPanel.
+- 🖥️ [**06. Hardware & Server Specification Guide**](./docs/06.%20Hardware%20&%20Server%20Specification%20Guide.md) — Panduan rekomendasi spek server & standar metrik kapan harus upgrade.
 
-## 📜 Available Commands
+---
 
-### Composer Scripts
+## 🤝 Panduan Kontribusi (Contributing)
 
-```bash
-# Start development environment
-composer run dev
+Kami menyambut baik kontribusi dari komunitas! Untuk menjaga kerapian repositori, ikuti aturan berikut:
 
-# Run tests
-composer run test
+1. **Fork** repositori ini ke akun GitHub Anda.
+2. Buat branch fitur baru:
+   ```bash
+   git checkout -b feat/nama-fitur-baru
+   ```
+3. Lakukan perubahan kode dengan mematuhi aturan arsitektur pada [`AGENTS.md`](./AGENTS.md).
+4. Pastikan seluruh pengujian lokal lulus:
+   ```bash
+   php artisan test
+   ```
+5. Gunakan format **Conventional Commits** saat commit:
+   ```bash
+   git commit -m "feat(module): deskripsi singkat perubahan"
+   ```
+6. Push branch Anda dan buat **Pull Request (PR)** baru ke branch `main`.
 
-# Code formatting (if configured)
-composer run format
+---
 
-# Static analysis (if configured)
-composer run analyze
-```
+## 📜 Lisensi (License)
 
-### NPM Scripts
+Proyek ini dirilis di bawah lisensi terbuka [MIT License](https://opensource.org/licenses/MIT). Anda bebas menggunakan, memodifikasi, dan mendistribusikan kode ini untuk keperluan komersial maupun non-komersial.
 
-```bash
-# Start Vite dev server
-npm run dev
+---
 
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Lint JavaScript/TypeScript
-npm run lint
-
-# Format code
-npm run format
-```
-
-### Artisan Commands
-
-```bash
-# Start development server
-php artisan serve
-
-# Run migrations
-php artisan migrate
-
-# Rollback migrations
-php artisan migrate:rollback
-
-# Fresh migrations with seeding
-php artisan migrate:fresh --seed
-
-# Generate application key
-php artisan key:generate
-
-# Clear all caches
-php artisan optimize:clear
-
-# Cache everything for production
-php artisan optimize
-
-# Create symbolic link for storage
-php artisan storage:link
-
-# Start queue worker
-php artisan queue:work
-
-# List all routes
-php artisan route:list
-
-# Create a new controller
-php artisan make:controller YourController
-
-# Create a new model
-php artisan make:model YourModel -m
-
-# Create a new migration
-php artisan make:migration create_your_table
-```
-
-## 📁 Project Structure
-
-```
-tailadmin-laravel/
-├── app/                    # Application logic
-│   ├── Http/              # Controllers, Middleware, Requests
-│   ├── Models/            # Eloquent models
-│   └── Providers/         # Service providers
-├── bootstrap/             # Framework bootstrap files
-├── config/                # Configuration files
-├── database/              # Migrations, seeders, factories
-│   ├── migrations/
-│   ├── seeders/
-│   └── factories/
-├── public/                # Public assets (entry point)
-│   ├── build/            # Compiled assets (generated)
-│   └── index.php         # Application entry point
-├── resources/             # Views and raw assets
-│   ├── css/              # Stylesheets (Tailwind)
-│   ├── js/               # JavaScript files (Alpine.js)
-│   └── views/            # Blade templates
-├── routes/                # Route definitions
-│   ├── web.php           # Web routes
-│   ├── api.php           # API routes
-│   └── console.php       # Console routes
-├── storage/               # Logs, cache, uploads
-│   ├── app/
-│   ├── framework/
-│   └── logs/
-├── tests/                 # Pest test files
-│   ├── Feature/
-│   └── Unit/
-├── .env.example           # Example environment file
-├── artisan                # Artisan CLI
-├── composer.json          # PHP dependencies
-├── package.json           # Node dependencies
-├── vite.config.js         # Vite configuration
-└── tailwind.config.js     # Tailwind configuration
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### "Class not found" errors
-```bash
-composer dump-autoload
-```
-
-#### Permission errors on storage/bootstrap/cache
-```bash
-chmod -R 775 storage bootstrap/cache
-```
-
-#### NPM build errors
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-#### Clear all caches
-```bash
-php artisan optimize:clear
-```
-
-#### Database connection errors
-- Check `.env` database credentials
-- Ensure database server is running
-- Verify database exists
-
-## 🔄 Update Log
-
-### [2026-05-23]
-
-- Added **AI Settings** page to configure models, keys, and token limits.
-- Added **Maps** page with MapLibre GL, Leaflet, and iframe styles.
-- Added **Vector Maps** page powered by AmCharts 5 geodata (World & USA).
-- Added **Radar Charts** page with 3 unique formats.
-- Added **Radial Progress Charts** page featuring 4 custom layout templates.
-- Introduced new **Bar Charts Five & Six** and **Pie Charts Four & Five**.
-
-### [April 28, 2026]
-- Added **AI Dashboard** with token usage and revenue tracking.
-- Added **Sales Dashboard** with retention and multi-channel analytics.
-- Added **Finance Dashboard** with cashflow and balance management.
-- Introduced **6 New Layout variations** for improved UI flexibility.
-- Integrated **Advanced Data Visualization** with 7+ new chart types.
-
-### [2026-03-15]
-- Fixed PHP 8.5 deprecation warning
-
-### [2025-12-29]
-- Added Date Picker in Statistics Chart
-
-## License
-
-Refer to our [LICENSE](https://tailadmin.com/license) page for more information.
+<p align="center">
+  Dibuat dengan ❤️ untuk kemudahan pengelolaan pembukuan kas UMKM dan organisasi.
+</p>
