@@ -49,9 +49,11 @@
             </button>
 
             <!-- Logo (mobile only) -->
-            <a href="/" class="xl:hidden">
-                <img class="dark:hidden" src="/images/logo/logo.svg" alt="Logo" />
-                <img class="hidden dark:block" src="/images/logo/logo-dark.svg" alt="Logo" />
+            <a href="{{ route('modules.dashboard') }}" class="xl:hidden flex items-center gap-2.5">
+                <img src="/images/logo/logo-icon.svg" alt="Logo" class="w-7 h-7 shrink-0" />
+                <span class="font-bold text-sm text-gray-900 dark:text-white tracking-tight truncate max-w-[150px]">
+                    {{ config('app.name', 'Sistem Kas') }}
+                </span>
             </a>
 
             <!-- Application Menu Toggle (mobile only) -->
